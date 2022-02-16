@@ -10,31 +10,13 @@ jobs:
       fail-fast: false
       matrix:
         config:
+        
         - {
-            name: "Visual Studio 64-bit",
-            os: windows-latest,
-            cmake_opts: "-A x64 \
-              -DALSOFT_BUILD_ROUTER=ON \
-              -DALSOFT_REQUIRE_WINMM=ON \
-              -DALSOFT_REQUIRE_DSOUND=ON \
-              -DALSOFT_REQUIRE_WASAPI=ON",
-            build_type: "Release"
-          }
-        - {
-            name: "macOS",
-            os: macos-latest,
-            cmake_opts: "-DALSOFT_REQUIRE_COREAUDIO=ON",
-            build_type: "Release"
-          }
-        - {
-            name: "Linux",
+            name: "Android",
             os: ubuntu-latest,
-            cmake_opts: "-DALSOFT_REQUIRE_RTKIT=ON \
-              -DALSOFT_REQUIRE_ALSA=ON \
-              -DALSOFT_REQUIRE_OSS=ON \
-              -DALSOFT_REQUIRE_PORTAUDIO=ON \
-              -DALSOFT_REQUIRE_PULSEAUDIO=ON \
-              -DALSOFT_REQUIRE_JACK=ON",
+            cmake_opts: "-DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
+              -DANDROID_ABI=armeabi-v7a \
+              -DANDROID_PLATFORM=android-19",
             deps_cmdline: "sudo apt update && sudo apt-get install -qq \
               libpulse-dev \
               portaudio19-dev \
