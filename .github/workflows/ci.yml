@@ -46,3 +46,9 @@ jobs:
       shell: bash
       run: |
         cmake --build build --config ${{matrix.config.build_type}}
+
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: libopenal
+        path: ${{github.workspace}}/build/libopenal.so
